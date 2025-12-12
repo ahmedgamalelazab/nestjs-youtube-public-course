@@ -6,6 +6,134 @@
 
 ### NestJS architecture
 
+
+```mermaid
+graph TB
+    subgraph NestJS[NestJS Internal Component Architecture]
+        direction TB
+        
+        subgraph ModuleSystem[Module System - @Module Decorator]
+            direction TB
+            Module[Module<br/>Container for organizing code]
+            ModuleImports[imports: Module dependencies]
+            ModuleControllers[controllers: Route handlers]
+            ModuleProviders[providers: Services & utilities]
+            ModuleExports[exports: Shared providers]
+            
+            Module --- ModuleImports
+            Module --- ModuleControllers
+            Module --- ModuleProviders
+            Module --- ModuleExports
+        end
+        
+        subgraph Controllers[Controllers - @Controller Decorator]
+            direction TB
+            Controller[Controller<br/>TypeScript Class]
+            Routes[Define Routes & Endpoints]
+            RequestHandlers[Handle Incoming Requests]
+            ResponseReturn[Return Responses to Client]
+            
+            Controller --- Routes
+            Controller --- RequestHandlers
+            Controller --- ResponseReturn
+        end
+        
+        subgraph Services[Services - @Injectable Decorator]
+            direction TB
+            Service[Service<br/>TypeScript Class]
+            BusinessLogic[Business Logic Implementation]
+            DataOperations[Data Operations & Processing]
+            DI[Dependency Injection System]
+            
+            Service --- BusinessLogic
+            Service --- DataOperations
+            Service --- DI
+        end
+        
+        subgraph Pipes[Pipes - Transform Input Data]
+            direction TB
+            PipeComponent[Pipe]
+            PipeValidation[Validation]
+            PipeTransformation[Data Transformation]
+            PipeScope[Applied to: routes, controllers, or app-wide]
+            
+            PipeComponent --- PipeValidation
+            PipeComponent --- PipeTransformation
+            PipeComponent --- PipeScope
+        end
+        
+        subgraph Guards[Guards - @Injectable + CanActivate]
+            direction TB
+            GuardComponent[Guard<br/>TypeScript Class]
+            Authentication[Authentication]
+            Authorization[Authorization]
+            RateLimiting[Rate Limiting]
+            AccessControl[Control Access to Endpoints]
+            
+            GuardComponent --- Authentication
+            GuardComponent --- Authorization
+            GuardComponent --- RateLimiting
+            GuardComponent --- AccessControl
+        end
+        
+        subgraph Middleware[Middleware - Function/Class]
+            direction TB
+            MiddlewareComponent[Middleware]
+            ExecuteCode[Execute Code]
+            ModifyReqRes[Modify Request/Response Objects]
+            EndCycle[End Request-Response Cycle]
+            CallNext[Call Next Middleware]
+            
+            MiddlewareComponent --- ExecuteCode
+            MiddlewareComponent --- ModifyReqRes
+            MiddlewareComponent --- EndCycle
+            MiddlewareComponent --- CallNext
+        end
+        
+        subgraph Interceptors[Interceptors - Intercept HTTP]
+            direction TB
+            InterceptorComponent[Interceptor<br/>TypeScript Class]
+            InterceptRequest[Intercept Incoming Requests]
+            InterceptResponse[Intercept Outgoing Responses]
+            Logging[Logging]
+            ErrorHandling[Error Handling]
+            Caching[Caching]
+            ResponseTransform[Response Transformation]
+            
+            InterceptorComponent --- InterceptRequest
+            InterceptorComponent --- InterceptResponse
+            InterceptorComponent --- Logging
+            InterceptorComponent --- ErrorHandling
+            InterceptorComponent --- Caching
+            InterceptorComponent --- ResponseTransform
+        end
+        
+        ModuleControllers -.contains.-> Controller
+        ModuleProviders -.contains.-> Service
+        Controller -.injects.-> Service
+        Controller -.uses.-> PipeComponent
+        Controller -.protected by.-> GuardComponent
+        Controller -.intercepted by.-> InterceptorComponent
+        Module -.uses.-> MiddlewareComponent
+    end
+    
+    style Module fill:#e3f2fd,stroke:#01579b,stroke-width:3px,color:#000
+    style Controller fill:#fce4ec,stroke:#880e4f,stroke-width:3px,color:#000
+    style Service fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px,color:#000
+    style PipeComponent fill:#fff3e0,stroke:#e65100,stroke-width:3px,color:#000
+    style GuardComponent fill:#f3e5f5,stroke:#4a148c,stroke-width:3px,color:#000
+    style MiddlewareComponent fill:#fff9c4,stroke:#f57f17,stroke-width:3px,color:#000
+    style InterceptorComponent fill:#e0f2f1,stroke:#004d40,stroke-width:3px,color:#000
+    
+    style ModuleSystem fill:#bbdefb,stroke:#0277bd,stroke-width:2px
+    style Controllers fill:#f8bbd0,stroke:#c2185b,stroke-width:2px
+    style Services fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+    style Pipes fill:#ffe0b2,stroke:#ef6c00,stroke-width:2px
+    style Guards fill:#e1bee7,stroke:#7b1fa2,stroke-width:2px
+    style Middleware fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+    style Interceptors fill:#b2dfdb,stroke:#00695c,stroke-width:2px
+```
+
 ![alt text](nestjs-architecture.png)
 
 - NestJS uses a ```modular architecture``` that enables developers to generate reusable code and organize individual modules for specific concerns. Here are some building blocks in NestJS:
