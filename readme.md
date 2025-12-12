@@ -6,21 +6,21 @@
 
 ![alt text](nestjs-architecture.png)
 
-NestJS uses a ```modular architecture``` that enables developers to generate reusable code and organize individual modules for specific concerns. Here are some building blocks in NestJS:
+- NestJS uses a ```modular architecture``` that enables developers to generate reusable code and organize individual modules for specific concerns. Here are some building blocks in NestJS:
 
-```Modules```: A module is a class mark with the ```@Module() decorator```. It serves as a container for related ```controllers```, ```providers```, and other related codes. NestJS provides a powerful module system that allows developers to create ```reusable modules``` and organize their code.
+- ```Modules```: A module is a class mark with the ```@Module() decorator```. It serves as a container for related ```controllers```, ```providers```, and other related codes. NestJS provides a powerful module system that allows developers to create ```reusable modules``` and organize their code.
 
-```Controllers```: A controller is responsible for ```handling incoming requests and returning responses``` to the client. ```It is a TypeScript class annotated with the @Controller() decorator```. Controllers are used to ```define routes and endpoint handlers for the application```.
+- ```Controllers```: A controller is responsible for ```handling incoming requests and returning responses``` to the client. ```It is a TypeScript class annotated with the @Controller() decorator```. Controllers are used to ```define routes and endpoint handlers for the application```.
 
-```Services```: In NestJS, ```a service is a TypeScript class annotated with the @Injectable() decorator```. It is responsible for handling business logic, performing data operations, and providing functionality to other parts of the application ```through the NestJS dependency injection system```.
+- ```Services```: In NestJS, ```a service is a TypeScript class annotated with the @Injectable() decorator```. It is responsible for handling business logic, performing data operations, and providing functionality to other parts of the application ```through the NestJS dependency injection system```.
 
-```Pipes```: Pipes can be applied to ```individual route handlers```, controllers, or the entire application to ```transform input data before it is processed by a controller```, making them useful for tasks such as ```validation and transformation```.
+- ```Pipes```: Pipes can be applied to ```individual route handlers```, controllers, or the entire application to ```transform input data before it is processed by a controller```, making them useful for tasks such as ```validation and transformation```.
 
-```Guards```: A guard ```is a class mark with the @Injectable() decorator and implements the CanActivate interface```. NestJS applications use it to ```control access to endpoints by performing tasks such as authentication, authorization, and rate limiting```.
+- ```Guards```: A guard ```is a class mark with the @Injectable() decorator and implements the CanActivate interface```. NestJS applications use it to ```control access to endpoints by performing tasks such as authentication, authorization, and rate limiting```.
 
-```Middleware```: Middleware functions access the request, response, and the next middleware in the stack. ```Middleware functions execute code, modify the request and response objects, end the request-response cycle```, or call the next middleware in the stack.
+- ```Middleware```: Middleware functions access the request, response, and the next middleware in the stack. ```Middleware functions execute code, modify the request and response objects, end the request-response cycle```, or call the next middleware in the stack.
 
-Interceptors: NestJS uses interceptors as ```classes that intercept incoming HTTP requests and outgoing HTTP responses```. Interceptors handle ```logging, error handling, caching, or response transformation```.
+- Interceptors: NestJS uses interceptors as ```classes that intercept incoming HTTP requests and outgoing HTTP responses```. Interceptors handle ```logging, error handling, caching, or response transformation```.
 
 ### Nestjs request lifecycle
 ![alt text](request-life-cycle.png)
