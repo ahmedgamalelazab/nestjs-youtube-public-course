@@ -2,6 +2,8 @@
 
 ### What Is NestJS?
 
+- NestJS is a widely used open-source framework that empowers developers to create robust and high-performing web applications on top of Node.js. With many powerful tools and features, NestJS is a practical framework for building scalable and maintainable web applications that meet modern development standards. NestJS uses TypeScript, an enhanced version of JavaScript that provides additional features and stricter typing to ensure improved code quality and reliability.
+
 ### NestJS architecture
 
 ![alt text](nestjs-architecture.png)
